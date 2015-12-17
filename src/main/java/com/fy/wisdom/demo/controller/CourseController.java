@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.fy.wisdom.demo.model.Course;
@@ -13,7 +14,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,14 +37,9 @@ public class CourseController {
 	
 	private static Logger log = LoggerFactory.getLogger(CourseController.class);
 
+	@Resource
 	private CourseService courseService;
 
-	@Autowired
-	public void setCourseService(CourseService courseService) {
-		this.courseService = courseService;
-	}
-
-	
 	//本方法将处理 /courses/view?courseId=123 形式的URL
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String viewCourse(@RequestParam("courseId") Integer courseId,
@@ -61,7 +56,7 @@ public class CourseController {
 	@RequestMapping("/view2/{courseId}")
 	public String viewCourse2(@PathVariable("courseId") Integer courseId,
 			Map<String, Object> model) {
-		
+
 		log.debug("In viewCourse2, courseId = {}", courseId);
 		Course course = courseService.getCoursebyId(courseId);
 		model.put("course",course);
@@ -96,7 +91,7 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
-	public String showUploadPage(@RequestParam(value= "multi", required = false) Boolean multi){	
+	public String showUploadPage(@RequestParam(value= "multi", required = false) Boolean multi){
 		if(multi != null && multi){
 			return "course_admin/multifile";	
 		}
@@ -108,7 +103,7 @@ public class CourseController {
 		
 		if(!file.isEmpty()){
 			log.debug("Process file: {}", file.getOriginalFilename());
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File("c:\\temp\\imooc\\", System.currentTimeMillis()+ file.getOriginalFilename()));
+			FileUtils.copyInputStreamToFile(file.getInputStream(), new File("f:\\temp\\file\\", System.currentTimeMillis()+ file.getOriginalFilename()));
 		}
 		
 		return "success";
