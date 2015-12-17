@@ -1,4 +1,4 @@
-﻿package com.fy.wisdom.demo.service.impl;
+package com.fy.wisdom.demo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
