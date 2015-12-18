@@ -1,23 +1,25 @@
 package com.fy.wisdom.demo.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fy.wisdom.demo.model.Chapter;
 import com.fy.wisdom.demo.model.Course;
 import com.fy.wisdom.demo.service.CourseService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Created by ltzm01 on 2015/12/18.
+ */
 @Service("courseService")
-public class CourseServiceImpl implements CourseService {
+public class CourseServiceImpl implements CourseService{
+
 
     public Course getCoursebyId(Integer courseId) {
-
         Course course = new Course();
 
         course.setCourseId(courseId);
-        course.setTitle("深入浅出Java多线程");
+        course.setTitle("深入浅出java多线程");
         course.setImgPath("resources/imgs/course-img.jpg");
         course.setLearningNum(12345);
         course.setLevel(2);
@@ -33,7 +35,6 @@ public class CourseServiceImpl implements CourseService {
 
         return course;
     }
-
     private void warpChapterList(Integer courseId,List<Chapter> chapterList) {
         Chapter chapter = new Chapter();
         chapter.setId(1);

@@ -71,6 +71,9 @@
     </bean>
 
     <mvc:interceptors>
-        <bean class="com.fy.wisdom.demo.interceptor.TestInterceptor"></bean>
+        <mvc:interceptor>
+            <mvc:mapping path="/courses/**"/>
+            <bean class="com.fy.wisdom.demo.interceptor.TestInterceptor"></bean>
+        </mvc:interceptor>
     </mvc:interceptors>
 </beans>
