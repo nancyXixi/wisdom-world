@@ -73,7 +73,8 @@ public class CourseController {
 		
 		return "course_overview";
 	}
-	
+
+	//courses/admin?add=111
 	@RequestMapping(value="/admin", method = RequestMethod.GET, params = "add")
 	public String createCourse(){
 		return "course_admin/edit";
@@ -84,6 +85,7 @@ public class CourseController {
 		
 		log.debug("Info of Course:");
 		log.debug(ReflectionToStringBuilder.toString(course));
+		System.out.println(ReflectionToStringBuilder.toString(course));
 		
 		//在此进行业务操作，比如数据库持久化
 		course.setCourseId(123);
