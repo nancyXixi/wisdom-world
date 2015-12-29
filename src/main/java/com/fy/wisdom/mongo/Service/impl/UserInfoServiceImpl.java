@@ -16,6 +16,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserRepository repository;
     @Override
     public void saveUserInfo() {
-        repository.insert(new UserInfo("feiyu",20));
+        repository.insert(new UserInfo("feiyu飞鱼",20));
     }
 }

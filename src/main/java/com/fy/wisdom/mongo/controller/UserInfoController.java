@@ -17,7 +17,7 @@ public class UserInfoController {
     @Resource
     private UserInfoService userInfoService;
 
-    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String test(){
         userInfoService.saveUserInfo();
         return "hello";

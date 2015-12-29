@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class UserInfo {
 
     @Id
-    private Long userId;
+    private String userId;
     private String userName;
     private int age;
 
