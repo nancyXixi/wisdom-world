@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="applicationName" value="Wisdom-world" />
+    <contextName>${applicationName}</contextName>
+
+    <!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%-5level] %date [%thread] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ch.qos.logback.core.rolling.RollingFileAppender 文件日志输出 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>F:/log/wisdom.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>F:/log/wisdom-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>10</MaxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>5MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- 时间滚动输出 level为 ERROR 日志 -->
+   <appender name="file—error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <FileNamePattern>F:/log/error.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--打印级别TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF-->
+    <!--additivity默认true,false不向上级即root传递-->
+    <logger name="org.springframework" level="WARN"/>
+
+    <logger name="com.fy.wisdom" level="DEBUG"/>
+
+    <!-- 日志级别 -->
+    <!--root也是<loger>元素，但是它是根loger,是所有logger的上级-->
+    <root level="INFO">
+        <!-- 分别在FILE文件和控制台输出 -->
+        <appender-ref ref="file"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="file—error"/>
+    </root>
+
+</configuration>
