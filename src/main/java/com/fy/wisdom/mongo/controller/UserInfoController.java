@@ -2,17 +2,18 @@ package com.fy.wisdom.mongo.controller;
 
 import com.fy.wisdom.mongo.Service.UserInfoService;
 import com.fy.wisdom.mongo.entity.UserInfo;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * Created by ltzm01 on 2015/12/28.
@@ -32,12 +33,15 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping(value = "/toSave",method = RequestMethod.GET)
-    public String toSave(){
+    public String toSave(@RequestParam(value = "userId",required = false) String userId,Model model) {
+        if(StringUtils.isNotEmpty(userId)){
+            model.addAttribute("info",userInfoService.findById(userId));
+        }
         return "mongo/save";
     }
 
     /**
-     * 保存
+     * 保存和更新
      * @param userInfo
      * @return
      */
@@ -65,5 +69,12 @@ public class UserInfoController {
         modelAndView.addObject("users", userInfoService.findAll() );
         return modelAndView;
         //return "mongo/list";
+    }
+
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public String deleteUser(@RequestParam("userId") String userId){
+        userInfoService.deleteById(userId);
+        log.debug("删除Id为{}的用户",userId);
+        return "redirect:list";
     }
 }

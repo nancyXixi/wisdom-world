@@ -18,10 +18,18 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserRepository repository;
     @Override
     public UserInfo saveUserInfo(UserInfo userInfo) {
-        return repository.insert(userInfo);
+        return repository.save(userInfo);
     }
 
     public List<UserInfo> findAll(){
         return repository.findAll();
+    }
+
+    public void deleteById(String id){
+         repository.delete(id);
+    }
+
+    public UserInfo findById(String id){
+        return repository.findOne(id);
     }
 }

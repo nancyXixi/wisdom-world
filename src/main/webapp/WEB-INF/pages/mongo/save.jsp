@@ -12,11 +12,14 @@
 	<div id="main">
 		<div class="newcontainer" id="course_intro">
 		  <form action="<%= request.getContextPath()%>/user/save" method="post">
+			  <c:if test="${not empty info.userId}">
+			  	<input name="userId" type="hidden" value="${info.userId}">
+			  </c:if>
 		    <div>
-		       <span>姓名:</span><input type="text" id="userName" name="userName">
+		       <span>姓名:</span><input type="text" id="userName" name="userName" value="${info.userName}">
 		    </div>
 		    <div>
-		       <span>age:</span><input type="text" id="age" name="age">
+		       <span>age:</span><input type="text" id="age" name="age" value="${info.age}">
 		    </div>
 		    <div>
 		       <input type="submit" id="btnPass" value="提交" />
